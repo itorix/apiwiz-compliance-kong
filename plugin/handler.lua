@@ -52,7 +52,7 @@ function plugin:response(plugin_conf)
     local host = kong.request.get_host()
     local port = kong.request.get_port()
     local verb = kong.request.get_method()
-    local path = kong.request.get_raw_path()
+    local path = kong.request.get_path()
     local hostname = kong.request.get_host()
 
     local requestBody = kong.request.get_body()
@@ -92,7 +92,7 @@ function plugin:response(plugin_conf)
 
     compliancePayload.response = resData
 
-    -- kong.response.set_header("Comp-Req-Payload", json.encode(compliancePayload))
+    kong.response.set_header("Comp-Req-Payload", json.encode(compliancePayload))
 
     complianceHeaders["workspace-id"] = plugin_conf.workspaceId
     complianceHeaders["x-apikey"] = plugin_conf.key
@@ -103,7 +103,7 @@ function plugin:response(plugin_conf)
       body = json.encode(compliancePayload)
     })
 
-    -- kong.response.set_header("service-callout-response", json.encode(res.body))
+    kong.response.set_header("service-callout-response", json.encode(res.body))
     if client then client:close() end
     
   end
