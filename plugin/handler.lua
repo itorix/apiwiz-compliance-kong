@@ -48,11 +48,12 @@ function plugin:response(plugin_conf)
     local queryParams = kong.request.get_query()
     local formParams = {}
 
+    
     local scheme = kong.request.get_scheme()
     local host = kong.request.get_host()
     local port = kong.request.get_port()
     local verb = kong.request.get_method()
-    local path = kong.request.get_path()
+    local path = ngx.var.uri
     local hostname = kong.request.get_host()
 
     local requestBody = kong.request.get_body()
