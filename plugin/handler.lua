@@ -53,7 +53,7 @@ function plugin:response(plugin_conf)
     local host = kong.request.get_host()
     local port = kong.request.get_port()
     local verb = kong.request.get_method()
-    local path = ngx.var.uri
+    local path = kong.request.get_path()
     local hostname = kong.request.get_host()
 
     local requestBody = kong.request.get_body()
